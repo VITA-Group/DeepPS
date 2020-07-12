@@ -21,8 +21,12 @@
 	 <tr align="center">
 		<td colspan="6">(c) adjusting refinement level <em>l</em></td>
 	</tr>	
+	</tr>				 	
+	 <tr>
+		<td colspan="6"><p style="text-align: justify; FONT-SIZE:12">Our Deep Plastic Surgery framework allows users to (a) synthesize and (b) edit photos based on hand-drawn sketches. (c) Our model works robustly on various sketches by setting refinement level <em>l</em> adaptive to the quality of the input sketches, <em>i.e.</em>, higher <em>l</em> for poorer sketches, thus tolerating the drawing errors and achieving the controllability on sketch faithfulness. Note that our model requires no real sketches for training.</p></td>
+	</tr>
 </table>
-<p style="text-align: justify">Figure 1. Our Deep Plastic Surgery framework allows users to (a) synthesize and (b) edit photos based on hand-drawn sketches. (c) Our model works robustly on various sketches by setting refinement level <em>l</em> adaptive to the quality of the input sketches, <em>i.e.</em>, higher <em>l</em> for poorer sketches, thus tolerating the drawing errors and achieving the controllability on sketch faithfulness. Note that our model requires no real sketches for training.</p>
+
 
 This is a pytorch implementation of the paper.
 
