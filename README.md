@@ -1,11 +1,5 @@
 # Deep Plastic Surgery
 
-
-```diff
-- We are cleaning our code to make it more readable. 
-- Code is coming soon.
-```
-
 <table border="0" width='100%' style="FONT-SIZE:15" >
 	 <tr align="center">
 		<td width="9.70%" align="left"><img src="./figures/teaser-a.png" alt="" width="99%" ></td>
@@ -62,12 +56,24 @@ cd DeepPS/src
 ## Testing Example
 
 - Download pre-trained models from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
-- Sketch-to-photo translation with refinment level 1.0
+  - Google drive link is coming soon
+- Sketch-to-photo translation 
+  - setting <i>l</i> to 1 to use refinment level 1.0
   - setting <i>l</i> to -1 (default) means testing with multiple levels in \[0,1\] with step of l_step (default l_step = 0.25)
   - Results can be found in `../output/`
+  
 ```
 python test.py --l 1.0
 ```
+  
+<img src="https://github.com/TAMU-VITA/DeepPS/blob/master/figures/2.jpg" width="60%" height="60%">  
+  
+```
+python test.py
+```
+
+<img src="https://github.com/TAMU-VITA/DeepPS/blob/master/figures/1.jpg" width="60%" height="60%">  
+
 - Face editing with refinment level 0.0, 0.25, 0.5, 0.75 and 1.0
   - model_task to specify task. SYN for synthesis and EDT for editing
   - specify the task, input image filename, model filename for F and G, respectively
@@ -84,7 +90,9 @@ python test.py --help
 
 - Download pre-trained model F from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
 - Prepare your data in `../data/dataset/train/` in form of (I,S):
+  - Please refer to [pix2pix](https://github.com/phillipi/pix2pix#datasets) for more detail
 
+<img src="https://github.com/TAMU-VITA/DeepPS/blob/master/figures/0.jpg" width="40%" height="40%">
 
 ### Training on image synthesis task
 - Train G with default parameters on 256\*256 images
