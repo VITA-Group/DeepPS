@@ -42,6 +42,45 @@ accepted by European Conference on Computer Vision (ECCV), 2020.
 
 It is provided for educational/research purpose only. Please consider citing our paper if you find the software useful for your work.
 
+## Usage: 
+
+#### Prerequisites
+- Python 2.7
+- Pytorch 1.2.0
+- matplotlib
+- scipy
+- Pillow
+- torchsample
+
+#### Install
+- Clone this repo:
+```
+git clone https://github.com/TAMU-VITA/DeepPS.git
+cd DeepPS/src
+```
+
+## Testing Example
+
+- Download pre-trained models from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
+- Sketch-to-photo translation with refinment level 1.0
+  - setting l to -1 (default) means testing with multiple levels in \[0,1\] with step of l_step (default l_step = 0.25)
+  - Results can be found in `../output/`
+```
+python test.py --l 1.0
+```
+- Face editing with refinment level 0.0, 0.25, 0.5, 0.75 and 1.0
+  - model_task to specify task. SYN for synthesis and EDT for editing
+  - specify the task, input image filename, model filepname for F and G, respectively
+  - Results can be found in `../output/`
+```
+python test.py --model_task EDT --input_name ../data/EDT/4.png \
+--load_F_name ../save/ECCV-EDT-celebaHQ-F256.ckpt \
+--model_name ECCV-EDT-celebaHQ
+```
+- Use `--help` to view more testing options
+```
+python test.py --help
+```
 
 ### Contact
 
