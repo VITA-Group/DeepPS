@@ -90,7 +90,7 @@ python test.py --help
 
 - Download pre-trained model F from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
 - Prepare your data in `../data/dataset/train/` in form of (I,S):
-  - Please refer to [pix2pix](https://github.com/phillipi/pix2pix#datasets) for more detail
+  - Please refer to [pix2pix](https://github.com/phillipi/pix2pix#datasets) for more details
 
 <img src="https://github.com/TAMU-VITA/DeepPS/blob/master/figures/0.jpg" width="40%" height="40%">
 
@@ -105,9 +105,9 @@ python train.py --save_model_name PSGAN-SYN
 Saved model can be found at `../save/`
 - Train G with default parameters on 64\*64 images
   - Prepare your dataset in `../data/dataset64/train/` (for example, provided by [ContextualGAN](https://github.com/elliottwu/sText2Image))
-  - Prepare your network F pretrained on 64\*64 images as `../save/ECCV-SYN-celeba-F64.ckpt` 
-  - max_level = 1 to indicate only train on level 1 (level 1, 2, 3 means image resolution 64\*64, 128\*128, 256\*256.
-  - use_F_level 1 to indicate network F is used on level 1 
+  - Prepare your network F pretrained on 64\*64 images to be `../save/ECCV-SYN-celeba-F64.ckpt` 
+  - max_level = 1 to indicate only train on level 1 (level 1, 2, 3 means image resolution 64\*64, 128\*128, 256\*256)
+  - use_F_level = 1 to indicate network F is used on level 1 
   - Specify the max dilation diameter, training level, F model image size
   - AtoB means images are prepared in form of (S,I)
 ```
