@@ -63,14 +63,14 @@ cd DeepPS/src
 
 - Download pre-trained models from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
 - Sketch-to-photo translation with refinment level 1.0
-  - setting l to -1 (default) means testing with multiple levels in \[0,1\] with step of l_step (default l_step = 0.25)
+  - setting <i>l</i> to -1 (default) means testing with multiple levels in \[0,1\] with step of l_step (default l_step = 0.25)
   - Results can be found in `../output/`
 ```
 python test.py --l 1.0
 ```
 - Face editing with refinment level 0.0, 0.25, 0.5, 0.75 and 1.0
   - model_task to specify task. SYN for synthesis and EDT for editing
-  - specify the task, input image filename, model filepname for F and G, respectively
+  - specify the task, input image filename, model filename for F and G, respectively
   - Results can be found in `../output/`
 ```
 python test.py --model_task EDT --input_name ../data/EDT/4.png \
@@ -81,6 +81,13 @@ python test.py --model_task EDT --input_name ../data/EDT/4.png \
 ```
 python test.py --help
 ```
+
+### Training Structure Transfer G_S
+- Train G with default parameters on 256\*256 images
+  - Progressively train G.G64, G.G128 and G.G256 on 64\*64, 128\*128 and 256\*256 images like pix2pixHD.
+   - step1: G is first trained with a fixed <i>l</i> = 1 to learn the greatest refinement level
+   - step2: we then use <i>l</i> ∈ {i/K}, i=0,...,K where K = 20 (i.e. --max_dilate 21)
+
 
 ### Contact
 
