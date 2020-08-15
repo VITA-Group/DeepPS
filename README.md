@@ -74,21 +74,56 @@ python test.py --l 1.0
   - Results can be found in `../output/`
 ```
 python test.py --model_task EDT --input_name ../data/EDT/4.png \
---load_F_name ../save/ECCV-EDT-celebaHQ-F256.ckpt \
---model_name ECCV-EDT-celebaHQ
+--load_F_name ../save/ECCV-EDT-celebaHQ-F256.ckpt --model_name ECCV-EDT-celebaHQ
 ```
 - Use `--help` to view more testing options
 ```
 python test.py --help
 ```
+## Training Examples
 
-### Training Structure Transfer G_S
+- Download pre-trained model F from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
+- Prepare your data in `../data/dataset/train/` in form of (I,S):
+
+
+### Training on image synthesis task
 - Train G with default parameters on 256\*256 images
-  - Progressively train G.G64, G.G128 and G.G256 on 64\*64, 128\*128 and 256\*256 images like pix2pixHD.
-   - step1: G is first trained with a fixed <i>l</i> = 1 to learn the greatest refinement level
-   - step2: we then use <i>l</i> ∈ {i/K}, i=0,...,K where K = 20 (i.e. --max_dilate 21)
+  - Progressively train G64, G128 and G256 on 64\*64, 128\*128 and 256\*256 images like pix2pixHD.
+    - step1: for each resolution, G is first trained with a fixed <i>l</i> = 1 to learn the greatest refinement level for 30 epoches (--epoch_pre)
+    - step2: we then use <i>l</i> ∈ {i/K}, i=0,...,K where K = 20 (i.e. --max_dilate 21) for 200 epoches (--epoch)
+```
+python train.py --save_model_name PSGAN-SYN
+```
+Saved model can be found at `../save/`
+- Train G with default parameters on 64\*64 images
+  - Prepare your dataset in `../data/dataset64/train/` (for example, provided by [ContextualGAN](https://github.com/elliottwu/sText2Image))
+  - Prepare your network F pretrained on 64\*64 images as `../save/ECCV-SYN-celeba-F64.ckpt` 
+  - max_level = 1 to indicate only train on level 1 (level 1, 2, 3 means image resolution 64\*64, 128\*128, 256\*256.
+  - use_F_level 1 to indicate network F is used on level 1 
+  - Specify the max dilation diameter, training level, F model image size
+  - AtoB means images are prepared in form of (S,I)
+```
+python train.py --train_path ../data/dataset64/ \
+--max_dilate 9 --max_level 1 --use_F_level 1 \
+--load_F_name ../save/ECCV-SYN-celeba-F64.ckpt --img_size 64 \
+--save_model_name PSGAN-SYN-64 --AtoB
+```
 
+### Training on image editing task
+- Train G with default parameters on 256\*256 images
+  - Progressively train G64, G128 and G256 on 64\*64, 128\*128 and 256\*256 images like pix2pixHD.
+    - step1: for each resolution, G is first trained with a fixed <i>l</i> = 1 to learn the greatest refinement level for 30 epoches (--epoch_pre)
+    - step2: we then use <i>l</i> ∈ {i/K}, i=0,...,K where K = 20 (i.e. --max_dilate 21) for 200 epoches (--epoch)
+```
+python train.py --model_task EDT \
+--load_F_name ../save/ECCV-EDT-celebaHQ-F256.ckpt --save_model_name PSGAN-EDT
+```
+Saved model can be found at `../save/`
 
+- Use `--help` to view more testing options
+```
+python train.py --help
+```
 ### Contact
 
 Shuai Yang
