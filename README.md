@@ -128,7 +128,7 @@ python train.py --model_task EDT \
 ```
 Saved model can be found at `../save/`
 
-- Use `--help` to view more testing options
+- Use `--help` to view more training options
 ```
 python train.py --help
 ```
