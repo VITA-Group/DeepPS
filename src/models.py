@@ -16,7 +16,7 @@ from torch.nn.utils import spectral_norm
 from utils import to_var, to_data, weights_init, visualize, load_image, save_image, binarize, get_mask
 from roughSketchSyn import ConditionalDilate, MyDilateBlur, random_discard, RandomDeform
 
-id = 6900 # for saving network output to file during training
+id = 0 # for saving network output to file during training
 
 class AdaptiveInstanceNorm(nn.Module):
     def __init__(self, style_dim, in_channel):
