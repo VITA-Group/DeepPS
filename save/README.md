@@ -1,4 +1,4 @@
-- Download pre-trained models from [[Google Drive]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ) or [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu)
+- Download pre-trained models from [[Google Drive]](https://drive.google.com/file/d/1Lv2j_CShUahPrRlGZGavpsFou3oF-yS1/view?usp=sharing) | [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu)
 
 - Model names
   - ECCV-EDT-celebaHQ-DXX.ckpt: pre-trained sketch refinement discriminator D on image editing task at resolution XX 
