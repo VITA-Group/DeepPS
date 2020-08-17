@@ -555,6 +555,7 @@ class PSGAN(nn.Module):
         # for editing
         I64_in = I * (1-M)/2
         S64 = S64 * (1+M)/2 
+        S64_in = S64_in * (1+M)/2 
         return S64_in, I64_in, S64, I, M, None
     
     def prepare_training_images128(self, S, I, l, label, level=2, M=None):
@@ -579,8 +580,10 @@ class PSGAN(nn.Module):
                                       align_corners=True), threshold=-1)
         I128_in = I * (1-M)/2
         S128 = S128 * (1+M)/2
+        S128_in = S128_in * (1+M)/2
         I64_in = I64 * (1-M64)/2
         S64 = S64 * (1+M64)/2
+        S64_in = S64_in * (1+M64)/2
         
         if level == 1:
             return S64_in, I64_in, S64, I64, M64, None
@@ -618,10 +621,13 @@ class PSGAN(nn.Module):
                                      align_corners=True), threshold=-1) 
         I256_in = I * (1-M)/2
         S256 = S256 * (1+M)/2
+        S256_in = S256_in * (1+M)/2
         I128_in = I128 * (1-M128)/2
         S128 = S128 * (1+M128)/2
+        S128_in = S128_in * (1+M128)/2
         I64_in = I64 * (1-M64)/2
         S64 = S64 * (1+M64)/2
+        S64_in = S64_in * (1+M64)/2
         
         if level == 1:
             return S64_in, I64_in, S64, I64, M64, None
