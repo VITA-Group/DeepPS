@@ -55,8 +55,7 @@ cd DeepPS/src
 
 ## Testing Example
 
-- Download pre-trained models from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
-  - Google drive link is coming soon
+- Download pre-trained models from [[Google Drive]](https://drive.google.com/file/d/1Lv2j_CShUahPrRlGZGavpsFou3oF-yS1/view?usp=sharing) | [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
 - Sketch-to-photo translation 
   - setting <i>l</i> to 1 to use refinment level 1.0
   - setting <i>l</i> to -1 (default) means testing with multiple levels in \[0,1\] with step of l_step (default l_step = 0.25)
@@ -88,7 +87,7 @@ python test.py --help
 ```
 ## Training Examples
 
-- Download pre-trained model F from [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
+- Download pre-trained model F from [[Google Drive]](https://drive.google.com/file/d/1Lv2j_CShUahPrRlGZGavpsFou3oF-yS1/view?usp=sharing) | [[Baidu Cloud]](https://pan.baidu.com/s/1QjOWk8Gw4UNN6ajHF8bMjQ)(code:oieu) to `../save/`
 - Prepare your data in `../data/dataset/train/` in form of (I,S):
   - Please refer to [pix2pix](https://github.com/phillipi/pix2pix#datasets) for more details
 
