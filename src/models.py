@@ -437,7 +437,7 @@ class PSGAN(nn.Module):
         
         self.edgeSmooth1 = MyDilateBlur() # for 256 and 64
         self.edgeSmooth2 = MyDilateBlur(kernel_size=5, sigma=0.55) # for 128
-        self.deform = RandomDeform(self.img_size, 8, 2, gpu=self.gpu)
+        self.deform = RandomDeform(self.img_size, 16, 4, gpu=self.gpu)
         self.edgedilate = ConditionalDilate(self.max_dilate, gpu=self.gpu) 
         
         self.trainerG64 = torch.optim.Adam(self.G64.parameters(), lr=0.0002, betas=(0.5, 0.999))
