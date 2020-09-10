@@ -371,10 +371,10 @@ class DiscriminatorSN(nn.Module):
         self.useFC = useFC
         
         # 32*32 --> 16*16 --> 8*8
-        size = input_size/2
+        size = input_size//2
         nf_mult = 1
         for n in range(1, n_layers):
-            size = size / 2
+            size = size // 2
             nf_mult_prev = nf_mult
             nf_mult = min(2 ** n, 8)
             modelList.append(ReflectionPad2d(padding=padding))
