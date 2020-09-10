@@ -71,3 +71,38 @@ class TrainOptions():
         for name, value in sorted(args.items()):
             print('%s: %s' % (str(name), str(value)))
         return self.opt
+    
+class TrainPix2PixOptions():
+    def __init__(self):
+        self.parser = argparse.ArgumentParser()
+
+        # data loader related
+        self.parser.add_argument('--train_path', type=str, default='../data/dataset/', help='path of the training images')
+        self.parser.add_argument('--AtoB', action='store_true', default=False, help='Whether the input images are arranged in form of [S,I]. Otherwise, [I,S]')
+        self.parser.add_argument('--img_size', type=int, default=256, help='training image size')     
+
+        # train related
+        self.parser.add_argument('--model_task', type=str, default='SYN', help='SYN for image synthesis, EDT for image editing')
+        self.parser.add_argument('--epoch', type=int, default=50, help='number of epoch')       
+        self.parser.add_argument('--batchsize', type=int, default=4, help='batchsize')
+        
+        self.parser.add_argument('--weight_rec', type=float, default=100.0, help='weight for reconstruction losses')
+        self.parser.add_argument('--weight_adv', type=float, default=1.0, help='weight for adversarial losses')
+        self.parser.add_argument('--weight_perc', nargs='+', type=float, default=[1.0,0.5], help='weights for perceptual losses on conv2_1 and conv3_1')        
+        self.parser.add_argument('--hinge', type=float, default=10.0, help='margin parameter for hinge loss')
+
+        # model related
+        self.parser.add_argument('--D_nlayers', type=int, default=5, help='number of layers in discriminator D')  
+        self.parser.add_argument('--G_nf', type=int, default=64, help='number of features in the first layer of G')
+        self.parser.add_argument('--D_nf', type=int, default=64, help='number of features in the first layer of D') 
+        self.parser.add_argument('--save_model_path', type=str, default='../save/', help='specify the model path to save')        
+        self.parser.add_argument('--save_model_name', type=str, default='PSGAN', help='specify the model name to save')
+        self.parser.add_argument('--gpu', type=int, default=1, help='gpu, 0 for cpu, 1 for gpu')
+        
+    def parse(self):
+        self.opt = self.parser.parse_args()
+        args = vars(self.opt)
+        print('--- load options ---')
+        for name, value in sorted(args.items()):
+            print('%s: %s' % (str(name), str(value)))
+        return self.opt
