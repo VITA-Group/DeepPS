@@ -72,7 +72,7 @@ def main():
     
     # sampling refinement level l from l_sample_range
     # we found that r=0.5 should be trained to discriminate the results from those under r=0.0 
-    l_sample_range = [1.*r/(opts.max_dilate-1) for r in range(opts.max_dilate)+[0.5]]
+    l_sample_range = [1.*r/(opts.max_dilate-1) for r in list(range(opts.max_dilate))+[0.5]]
     
     # We train 64*64 image (max_level = 1) by directly training netG.G64 on 64*64. 
     # We train 256*256 images (max_level = 3) by first training netG.G64 on 64*64,
