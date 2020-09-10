@@ -19,7 +19,7 @@ from torchvision import transforms as T
 # discard partial lines by removing random patches from the full sketches
 def random_discard(img):
     ht = img.size(2)
-    min_ht = ht / 8
+    min_ht = ht // 8
     max_ht = min_ht * 2
     for i in range(img.size(0)):
         for _ in range(np.random.randint(0, 3)):
@@ -90,19 +90,19 @@ class ConditionalDilate(nn.Module):
     def __init__(self, max_kernel_size=21, channels=3, gpu=True):
         super(ConditionalDilate, self).__init__()
         
-        self.max_kernel_size = max_kernel_size/2*2+1
+        self.max_kernel_size = max_kernel_size//2*2+1
         self.netBs = [OneDilate(i, gpu=gpu) for i in range(1,self.max_kernel_size+1,2)]
         
     def forward(self, x, l):
         l = min(self.max_kernel_size, max(1, l))
         lf = int(np.floor(l))
         if l == lf and l%2 == 1:
-            out = self.netBs[(lf-1)/2](x)
+            out = self.netBs[(lf-1)//2](x)
         else:
             lf = lf - (lf+1)%2
             lc = lf + 2
-            x1 = self.netBs[(lf-1)/2](x)
-            x2 = self.netBs[(lc-1)/2](x)
+            x1 = self.netBs[(lf-1)//2](x)
+            x2 = self.netBs[(lc-1)//2](x)
             out = (x1 * (lc-l) + x2 * (l-lf))/2.0
         return 1 - 2 * torch.clamp(out, min=0, max=1)   
     
