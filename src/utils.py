@@ -63,7 +63,7 @@ def save_image(img, filename):
     
 # generate random masks for image editing training  
 def get_mask(batch_size, image_size):
-    min_ht = image_size / 4
+    min_ht = image_size // 4
     max_ht = min_ht * 3
     masks = torch.zeros(batch_size,1,image_size,image_size)
     for i in range(batch_size):
