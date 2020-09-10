@@ -10,6 +10,7 @@ from torch.nn import Linear, Conv2d, BatchNorm2d, LeakyReLU, ConvTranspose2d, Re
 import torch.nn.functional as F
 from torch.autograd import Variable
 from torch.nn import ReflectionPad2d, ReplicationPad2d
+from torch.nn.utils import spectral_norm
 
 class Identity(nn.Module):
     def __init__(self):
@@ -261,3 +262,43 @@ class Pix2pix256(nn.Module):
         x14 = torch.cat((self.rdcb1(x13), x0), dim=1)
         x15 = torch.cat((self.rdcb0(x14), x01), dim=1)
         return  self.tanh(self.dconv1(self.pad3(F.relu(x15)))) 
+   
+class DiscriminatorSN(nn.Module):
+    def __init__(self, in_channels, out_channels, ndf=64, n_layers=5, input_size=256, useFC=False):
+        super(DiscriminatorSN, self).__init__()
+        
+        modelList = []       
+        kernel_size = 4
+        padding = int(np.ceil((kernel_size - 1)/2))
+        modelList.append(ReflectionPad2d(padding=padding))
+        modelList.append(spectral_norm(Conv2d(out_channels=ndf, kernel_size=kernel_size, stride=2,
+                              padding=0, in_channels=in_channels)))
+        modelList.append(LeakyReLU(0.2))
+        self.useFC = useFC
+        
+        size = input_size/2
+        nf_mult = 1
+        for n in range(1, n_layers):
+            size = size / 2
+            nf_mult_prev = nf_mult
+            nf_mult = min(2 ** n, 8)
+            modelList.append(ReflectionPad2d(padding=padding))
+            modelList.append(spectral_norm(Conv2d(out_channels=ndf * nf_mult, kernel_size=kernel_size, stride=2,
+                                  padding=0, in_channels=ndf * nf_mult_prev)))
+            modelList.append(LeakyReLU(0.2))
+        nf_mult_prev = nf_mult
+        nf_mult = min(2 ** n_layers, 8)
+        modelList.append(ReflectionPad2d(padding=padding))
+        modelList.append(spectral_norm(Conv2d(out_channels=ndf * nf_mult, kernel_size=kernel_size, stride=1, padding=0, in_channels=ndf * nf_mult_prev)))
+        modelList.append(LeakyReLU(0.2))
+        modelList.append(ReflectionPad2d(padding=padding))
+        modelList.append(spectral_norm(Conv2d(out_channels=out_channels, kernel_size=kernel_size, stride=1, padding=0, in_channels=ndf * nf_mult)))
+
+        self.model = nn.Sequential(*modelList)
+        self.fc = spectral_norm(nn.Linear((size-2)*(size-2)*out_channels, 1))
+        
+    def forward(self, x):
+        out = self.model(x).view(x.size(0), -1)
+        if self.useFC:
+            out = self.fc(out)
+        return out.view(-1)   
