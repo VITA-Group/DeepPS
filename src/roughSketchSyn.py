@@ -45,7 +45,7 @@ class MyDilateBlur(nn.Module):
         x_grid = x_cord.repeat(self.kernel_size).view(self.kernel_size, self.kernel_size)
         y_grid = x_grid.t()
         self.xy_grid = torch.stack([x_grid, y_grid], dim=-1)
-        self.mean = (self.kernel_size - 1)/2
+        self.mean = (self.kernel_size - 1)//2
         self.diff = -torch.sum((self.xy_grid - self.mean)**2., dim=-1)
         self.gaussian_filter = nn.Conv2d(in_channels=self.channels, out_channels=self.channels,
                                     kernel_size=self.kernel_size, groups=self.channels, bias=False)
@@ -73,7 +73,7 @@ class OneDilate(nn.Module):
         self.channels = channels
         gaussian_kernel = torch.ones(1, 1, self.kernel_size, self.kernel_size)
         gaussian_kernel = gaussian_kernel.repeat(self.channels, 1, 1, 1)
-        self.mean = (self.kernel_size - 1)/2
+        self.mean = (self.kernel_size - 1)//2
         self.gaussian_filter = nn.Conv2d(in_channels=self.channels, out_channels=self.channels,
                                     kernel_size=self.kernel_size, groups=self.channels, bias=False)
         if gpu:
