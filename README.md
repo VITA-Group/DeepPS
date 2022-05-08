@@ -34,7 +34,7 @@ accepted by European Conference on Computer Vision (ECCV), 2020.
 
 [[Project]](https://williamyang1991.github.io/projects/ECCV2020) | [[Paper]](https://arxiv.org/abs/2001.02890) | [[Human-Drawn Facial Sketches]](https://williamyang1991.github.io/projects/ECCV2020/DPS/files/human-drawn_facial_sketches.zip)
 
-It is provided for educational/research purpose only. Please consider citing our paper if you find the software useful for your work.
+Please consider citing our paper if you find the software useful for your work.
 
 ## Usage: 
 
