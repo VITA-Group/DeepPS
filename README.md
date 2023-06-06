@@ -44,7 +44,8 @@ Please consider citing our paper if you find the software useful for your work.
 - matplotlib
 - scipy
 - Pillow
-- torchsample
+- [torchsample](https://github.com/ncullen93/torchsample/tree/master)
+- opencv
 
 #### Install
 - Clone this repo:
